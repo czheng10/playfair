@@ -2,6 +2,8 @@
 Cindy Zheng 
 Playfair Cipher
 
+Dependencies: Rules.java
+
 Uses a playfair key to encode and decode text
  *************************************************************************/
 
@@ -69,7 +71,8 @@ public class playfair{
 	char[][] pfkey = assemblekey(alpha);
 
 	String mystr = ifOdd(twoletters(editinput(cipher)));
-	System.out.println(mystr);
+	Rules fin = new Rules(command, pfkey, mystr);
+	System.out.println(fin.cracked());
     } 
 }
 
