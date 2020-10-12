@@ -62,19 +62,19 @@ class Rules{
     public String row(String one, String two){
 	String back = "";
 	int rownum = Integer.parseInt(one.substring(0,1));
-	int[] col = new int[2];
-	col[0] = Integer.parseInt(one.substring(1));
-	col[1] = Integer.parseInt(two.substring(1));
+	int[] cols = new int[2];
+	cols[0] = Integer.parseInt(one.substring(1));
+	cols[1] = Integer.parseInt(two.substring(1));
 
 	if (direction.equals("encode")){
 	    if (rownum == 4){
-		for(int i=0; i<col.length; i++){
-		    back= back + keytable[0][col[i]];
+		for(int i=0; i<cols.length; i++){
+		    back= back + keytable[0][cols[i]];
 		}
 	    }
 	    else {
-		for(int i=0; i<col.length; i++){
-                    back= back + keytable[rownum+1][col[i]];
+		for(int i=0; i<cols.length; i++){
+                    back= back + keytable[rownum+1][cols[i]];
                 }
 		
 	    }
@@ -82,13 +82,13 @@ class Rules{
 
 	if (direction.equals("decode")){
 	     if (rownum == 0){
-                for(int i=0; i<col.length; i++){
-                    back= back + keytable[4][col[i]];
+                for(int i=0; i<cols.length; i++){
+                    back= back + keytable[4][cols[i]];
                 }
             }  	
             else {
-		for(int i=0; i<col.length; i++){
-                    back= back + keytable[rownum-1][col[i]];
+		for(int i=0; i<cols.length; i++){
+                    back= back + keytable[rownum-1][cols[i]];
                 }
 	    }
 	}
@@ -96,10 +96,48 @@ class Rules{
     }
 
     public String column(String one, String two){
-	return "test";
+	String back = "";
+        int colnum = Integer.parseInt(one.substring(1));
+        int[] rows= new int[2];
+        rows[0] = Integer.parseInt(one.substring(0,1));
+        rows[1] = Integer.parseInt(two.substring(0,1));
+
+        if (direction.equals("encode")){
+            if (colnum == 4){
+                for(int i=0; i<rows.length; i++){
+                    back= back + keytable[rows[i]][0];
+                }
+            }
+            else {
+                for(int i=0; i<rows.length; i++){
+                    back= back + keytable[rows[i]][colnum+1];
+                }
+
+            }
+        }
+
+        if (direction.equals("decode")){
+             if (colnum == 0){
+                for(int i=0; i<rows.length; i++){
+                    back= back + keytable[rows[i]][4];
+                }
+            }
+            else {
+                for(int i=0; i<rows.length; i++){
+                    back= back + keytable[rows[i]][colnum-1];
+                }
+            }
+        }
+        return back;
     }
     public String rule3(String one, String two){
-	return "test";
+	String back ="";
+	int row1 = Integer.parseInt(one.substring(0,1));
+	int col1= Integer.parseInt(one.substring(1));
+	int row2 = Integer.parseInt(two.substring(0,1));
+	int col2= Integer.parseInt(two.substring(1));
+	back = back + keytable[row1][col2] + keytable[row2][col1];
+	return back;
     }
     
     public String cracked(){
