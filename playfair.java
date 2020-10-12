@@ -33,13 +33,27 @@ public class playfair{
     //in the case of doubleletters
     public static String twoletters(String str){
 	int i = 0;
-	while (i <str.length()){
+	while (i+1 <str.length()){
 	    if ((str.charAt(i)==(str.charAt(i+1)))){
 		str = str.substring(0, i+1) + "X" + str.substring(i+1);
 	    }
 	    i+=2;
 	}
 	
+	return str;
+    }
+
+    //add Z or X to the end of the encrypted text is necessary
+    public static String ifOdd (String str){
+	char check = 'Z';
+	if (str.length() % 2 != 0){
+	    if (str.charAt(str.length()-1) == check){
+		str = str + "X";
+	    } 
+	    else{
+		str = str + "Z";
+	    }
+	}
 	return str;
     }
     
@@ -54,7 +68,7 @@ public class playfair{
 	//making a key
 	char[][] pfkey = assemblekey(alpha);
 
-	String mystr = twoletters(editinput(cipher));
+	String mystr = ifOdd(twoletters(editinput(cipher)));
 	System.out.println(mystr);
     } 
 }
